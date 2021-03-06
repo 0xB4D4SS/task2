@@ -21,17 +21,19 @@ window.onload = function() {;
     document.getElementById('save').addEventListener('click', function(){
         const fname = document.getElementById('fnamevalue').value;
         const sname = document.getElementById('snamevalue').value;
-        const age = document.getElementById('agevalue').value;
-        if (parseInt(age) > 150 || isNaN(parseInt(age))) {
+        const age = parseInt(document.getElementById('agevalue').value);
+        if (age > 150 || isNaN(age)) {
             alert("Wrong age!");
         }
         else {
-            const result = sendRequest("save", {fname, sname, parseInt(age)});
+            const result = sendRequest("save", {fname, sname, age});
+            alert("Success!");
         }
     });
 
     document.getElementById('upload').addEventListener('click', function(){
         const result = sendRequest("upload");
+        alert("Upload complete!");
     });
 
 }
