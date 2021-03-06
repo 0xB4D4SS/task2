@@ -26,8 +26,11 @@ class Application
     public function uploadData($params) {
         $records = $this->db->upload();
         $spreadsheetId = "1cWncchgqJ3VZN9UjGVX8q6QgDWXNfjYJHqoxgAS5QrQ";
-        $range = "Sheet1";
+        //$range = "Sheet1";
+        $i = 2;
+        //$this->service->spreadsheets_values->clear($spreadsheetId, $range);
         foreach ($records as $record) {
+            $range = "Sheet1!A".$i.":C".$i;
             $values = [
                 [$record->fname, $record->sname, $record->age]
             ];
@@ -37,16 +40,16 @@ class Application
             $params = [
                 'valueInputOption' => 'RAW'
             ];
-            $insert = [
-                'insertDataOption' => 'INSERT_ROWS'
-            ];
-            $result = $this->service->spreadsheets_values->append(
+//            $insert = [
+//              'insertDataOption' => 'OVERWRITE'
+//            ];
+            $result = $this->service->spreadsheets_values->update(
                 $spreadsheetId,
                 $range,
                 $body,
-                $params,
-                $insert
+                $params
             );
+            $i++;
         }
         if ($result)
         {

@@ -22,8 +22,12 @@ window.onload = function() {;
         const fname = document.getElementById('fnamevalue').value;
         const sname = document.getElementById('snamevalue').value;
         const age = document.getElementById('agevalue').value;
-
-        const result = sendRequest("save", {fname, sname, age});
+        if (parseInt(age) > 150 || isNaN(parseInt(age))) {
+            alert("Wrong age!");
+        }
+        else {
+            const result = sendRequest("save", {fname, sname, parseInt(age)});
+        }
     });
 
     document.getElementById('upload').addEventListener('click', function(){
