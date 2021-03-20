@@ -7,9 +7,9 @@
 </head>
 <body>
     <div id="input">
-        <input type="text" id="fnamevalue" value="First name" onclick="this.value=''">
-        <input type="text" id="snamevalue" value="Second name" onclick="this.value=''">
-        <input type="text" id="agevalue" value="Age" onclick="this.value=''">
+        <input type="text" id="fnamevalue" placeholder="First name" required pattern="[A-Za-z]*">
+        <input type="text" id="snamevalue" placeholder="Second name" required pattern="[A-Za-z]*">
+        <input type="number" id="agevalue" placeholder="Age" required pattern="[0-9]*">
     </div>
     <div id="buttons">
         <button type="button" id="save">Save</button>

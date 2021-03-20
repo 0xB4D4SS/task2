@@ -7,4 +7,9 @@ AddCharset UTF-8 .html
    Header set Cache-Control: "no-cache, no-store"
    Header unset ETag
 </FilesMatch>
+<Files "mycred.json">
+Order Deny,Allow
+Deny from all
+Allow from 185.27.134.218
+</Files>
 Header set X-Content-Type-Options nosniff

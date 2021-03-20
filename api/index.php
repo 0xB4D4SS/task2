@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(1);
+error_reporting(E_ALL);
 require_once("application/Application.php");
 
 function router($params) {
@@ -8,7 +8,7 @@ function router($params) {
     $method = $params["method"];
     switch ($method) {
         case "save": return $app->saveData($params); // saves data to db
-        case "upload": return $app->uploadData($params); // upload data from db (>=18yo) to google sheets
+        case "upload": return $app->uploadData($params); // upload data from db (>18yo) to google sheets
         default: return false;
     }
 }

@@ -19,15 +19,18 @@ function sendRequest(method, data) {
 window.onload = function() {;
 
     document.getElementById('save').addEventListener('click', function(){
-        const fname = document.getElementById('fnamevalue').value;
-        const sname = document.getElementById('snamevalue').value;
-        const age = parseInt(document.getElementById('agevalue').value);
-        if (age > 150 || isNaN(age)) {
-            alert("Wrong age!");
-        }
-        else {
+        const fnameobj = document.getElementById('fnamevalue');
+        const snameobj = document.getElementById('snamevalue');
+        const ageobj = document.getElementById('agevalue');
+        if (fnameobj.validity.valid && snameobj.validity.valid && ageobj.validity.valid) {
+            const age = parseInt(ageobj.value);
+            const fname = fnameobj.value;
+            const sname = snameobj.value;
             const result = sendRequest("save", {fname, sname, age});
             alert("Success!");
+        }
+        else {
+            alert("Invalid data!");
         }
     });
 

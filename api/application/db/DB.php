@@ -1,26 +1,30 @@
 <?php
+error_reporting(E_ALL);
 class DB
 {
     function __construct()
     {
-        $servername = "127.0.0.1";
-        $username = "mysql";
-        $password = "mysql";
-        $dbname = "task2";
-        $this->connection = new mysqli($servername, $username, $password, $dbname, 3306);
-        if ($this->connection->connect_errno) {
-            die("Connection failed" . $this->connection->connect_error);
+        $username = "onavt_28045182";
+        $password = "boot2216";
+        try {
+            $this->connection = new PDO('mysql:host=sql201.hostronavt.ru;dbname=onavt_28045182_db',
+                $username,
+                $password);
+        }
+        catch (PDOException $e) {
+            print 'Error!:'.$e->getMessage().'<br/>';
+            die();
         }
     }
 
     function __destruct()
     {
-        $this->connection->close();
+        $this->connection = null;
     }
 
     private function oneRecord($result)
     {
-        while ($obj = $result->fetch_object()) {
+        while ($obj = $result->fetchObject()) {
             return $obj; // for one record
         }
         return null;
@@ -29,7 +33,7 @@ class DB
     private function allRecords($result)
     {
         $res = array();
-        while ($obj = $result->fetch_object()) { // for many records
+        while ($obj = $result->fetchObject()) { // for many records
             $res[] = $obj;
         }
         return $res;
@@ -37,12 +41,27 @@ class DB
 
     public function save($fname, $sname, $age) {
         $query = "INSERT INTO people (fname, sname, age) VALUES ('".$fname."', '".$sname."', ".$age.")";
-        $result = $this->connection->query($query);
+        try {
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $result = $this->connection->query($query);
+        }
+        catch (PDOException $e) {
+            print 'Error!' . $e->getMessage();
+        }
+        $result = null;
         return true;
     }
     public function upload() {
-        $query = "SELECT * FROM people WHERE age >= 18";
-        $result = $this->connection->query($query);
-        return $this->allRecords($result);
+        $query = "SELECT * FROM people WHERE age > 18";
+        try {
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $result = $this->connection->query($query);
+        }
+        catch (PDOException $e) {
+            print 'Error!' . $e->getMessage();
+        }
+        $out = $this->allRecords($result);
+        $result = null;
+        return $out;
     }
 }

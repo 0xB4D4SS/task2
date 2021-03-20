@@ -21,14 +21,13 @@ class Application
         if ($params["fname"] && $params["sname"] && $params["age"]) {
             return $this->db->save($params["fname"], $params["sname"], $params["age"]);
         }
+        return false;
     }
 
     public function uploadData($params) {
         $records = $this->db->upload();
         $spreadsheetId = "1cWncchgqJ3VZN9UjGVX8q6QgDWXNfjYJHqoxgAS5QrQ";
-        //$range = "Sheet1";
         $i = 2;
-        //$this->service->spreadsheets_values->clear($spreadsheetId, $range);
         foreach ($records as $record) {
             $range = "Sheet1!A".$i.":C".$i;
             $values = [
@@ -40,9 +39,6 @@ class Application
             $params = [
                 'valueInputOption' => 'RAW'
             ];
-//            $insert = [
-//              'insertDataOption' => 'OVERWRITE'
-//            ];
             $result = $this->service->spreadsheets_values->update(
                 $spreadsheetId,
                 $range,
