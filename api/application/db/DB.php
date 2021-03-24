@@ -10,6 +10,7 @@ class DB
             $this->connection = new PDO('mysql:host=sql201.hostronavt.ru;dbname=onavt_28045182_db',
                 $username,
                 $password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch (PDOException $e) {
             print 'Error!:'.$e->getMessage().'<br/>';
@@ -40,10 +41,13 @@ class DB
     }
 
     public function save($fname, $sname, $age) {
-        $query = "INSERT INTO people (fname, sname, age) VALUES ('".$fname."', '".$sname."', ".$age.")";
+        $query =
+            $this->connection->prepare("INSERT INTO people (fname, sname, age) VALUES (:fname, :sname, :age)");
+        $query->bindParam(':fname', $fname);
+        $query->bindParam(':sname', $sname);
+        $query->bindParam(':age', $age);
         try {
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $result = $this->connection->query($query);
+            $result = $query->execute();
         }
         catch (PDOException $e) {
             print 'Error!' . $e->getMessage();
@@ -52,10 +56,10 @@ class DB
         return true;
     }
     public function upload() {
-        $query = "SELECT * FROM people WHERE age > 18";
+        $query =
+            $this->connection->prepare("SELECT * FROM people WHERE age > 18");
         try {
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $result = $this->connection->query($query);
+            $result = $query->execute();
         }
         catch (PDOException $e) {
             print 'Error!' . $e->getMessage();

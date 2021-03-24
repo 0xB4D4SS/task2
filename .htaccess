@@ -7,9 +7,11 @@ AddCharset UTF-8 .html
    Header set Cache-Control: "no-cache, no-store"
    Header unset ETag
 </FilesMatch>
-<Files "mycred.json">
-Order Deny,Allow
-Deny from all
-Allow from 185.27.134.218
-</Files>
+RedirectMatch 403 ^/vendor/.*$
+RedirectMatch 403 ^/mycred.json
+RedirectMatch 403 ^/composer.json
+RedirectMatch 403 ^/composer.lock
+RedirectMatch 403 ^/.gitignore
+RedirectMatch 403 ^/.gitattributes
+RedirectMatch 403 ^/script.js
 Header set X-Content-Type-Options nosniff
