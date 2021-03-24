@@ -43,7 +43,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
@@ -71,7 +71,7 @@
       <workItem from="1616272314909" duration="751000" />
       <workItem from="1616408410103" duration="18000" />
       <workItem from="1616571778058" duration="1197000" />
-      <workItem from="1616579464538" duration="2105000" />
+      <workItem from="1616579464538" duration="2278000" />
     </task>
     <servers />
   </component>
