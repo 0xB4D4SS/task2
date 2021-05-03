@@ -4,8 +4,8 @@ class DB
 {
     function __construct()
     {
-        $username = "onavt_28045182";
-        $password = "boot2216";
+        $username = "";
+        $password = "";
         try {
             $this->connection = new PDO('mysql:host=sql201.hostronavt.ru;dbname=onavt_28045182_db',
                 $username,
